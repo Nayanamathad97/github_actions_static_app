@@ -1,0 +1,1 @@
+# github_actions_static_app

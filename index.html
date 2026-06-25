@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XYZ — DevOps Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D1117;
+    --surface:#161B22;
+    --surface-2:#1C2330;
+    --border:#262C36;
+    --text:#E6EDF3;
+    --text-dim:#8B949E;
+    --green:#39D353;
+    --blue:#58A6FF;
+    --amber:#F0883E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.01em;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:var(--blue);text-decoration:none;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px;}
+
+  /* Nav */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(13,17,23,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  nav .wrap{display:flex;justify-content:space-between;align-items:center;height:64px;}
+  .logo{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:0.95rem;color:var(--text);}
+  .logo span{color:var(--green);}
+  .nav-links{display:flex;gap:28px;font-size:0.9rem;}
+  .nav-links a{color:var(--text-dim);transition:color .2s;}
+  .nav-links a:hover, .nav-links a:focus-visible{color:var(--text);}
+
+  /* Hero / terminal */
+  .hero{padding:90px 0 70px;}
+  .terminal{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 20px 60px -20px rgba(0,0,0,0.5);
+  }
+  .term-bar{
+    display:flex;align-items:center;gap:8px;
+    padding:10px 14px;border-bottom:1px solid var(--border);
+    background:var(--surface-2);
+  }
+  .dot{width:10px;height:10px;border-radius:50%;}
+  .dot.r{background:#FF5F56;} .dot.y{background:#FFBD2E;} .dot.g{background:#27C93F;}
+  .term-title{margin-left:8px;color:var(--text-dim);font-size:0.78rem;font-family:'JetBrains Mono',monospace;}
+  .term-body{padding:24px 22px 30px;font-family:'JetBrains Mono',monospace;font-size:0.92rem;min-height:190px;}
+  .term-line{color:var(--text-dim);margin-bottom:4px;}
+  .term-line .prompt{color:var(--green);}
+  .term-line .path{color:var(--blue);}
+  #typed-name{color:var(--text);font-weight:600;}
+  #typed-line2{color:var(--text-dim);}
+  .cursor{display:inline-block;width:8px;height:1.1em;background:var(--green);vertical-align:middle;animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  .hero-sub{margin-top:26px;color:var(--text-dim);font-size:1.05rem;max-width:560px;}
+  .hero-cta{margin-top:26px;display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    padding:10px 18px;border-radius:6px;font-size:0.9rem;font-weight:500;
+    border:1px solid var(--border);transition:border-color .2s, background .2s;
+  }
+  .btn-primary{background:var(--green);color:#04250D;border-color:var(--green);}
+  .btn-primary:hover{background:#2ec24a;}
+  .btn-ghost{color:var(--text);}
+  .btn-ghost:hover{border-color:var(--text-dim);}
+
+  section{padding:64px 0;border-top:1px solid var(--border);}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;color:var(--green);font-size:0.78rem;
+    text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;
+  }
+  h2.section-title{font-size:1.7rem;margin-bottom:8px;}
+  .section-desc{color:var(--text-dim);margin-bottom:36px;max-width:560px;font-size:0.96rem;}
+
+  /* Pipeline (experience) */
+  .pipeline{display:flex;flex-direction:column;gap:0;}
+  .stage{
+    display:grid;grid-template-columns:140px 1fr;gap:24px;
+    position:relative;padding:22px 0;
+  }
+  .stage:not(:last-child)::after{
+    content:'';position:absolute;left:69px;top:54px;bottom:-22px;width:2px;
+    background:var(--border);
+  }
+  .stage-meta{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--text-dim);text-align:right;padding-top:4px;}
+  .stage-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:8px;
+    padding:18px 20px;
+  }
+  .stage-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
+  .stage-role{font-weight:600;font-size:1.02rem;}
+  .stage-co{color:var(--text-dim);font-size:0.88rem;}
+  .badge{
+    font-family:'JetBrains Mono',monospace;font-size:0.7rem;font-weight:600;
+    padding:3px 9px;border-radius:20px;display:inline-flex;align-items:center;gap:5px;
+    background:rgba(57,211,83,0.12);color:var(--green);border:1px solid rgba(57,211,83,0.3);
+    white-space:nowrap;
+  }
+  .badge::before{content:'●';font-size:0.6rem;}
+  .stage-desc{color:var(--text-dim);font-size:0.9rem;margin-top:8px;}
+  .stage-desc ul{margin:8px 0 0 0;padding-left:18px;}
+  .stage-desc li{margin-bottom:4px;}
+
+  /* Stack grid */
+  .stack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
+  .stack-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px 20px;
+  }
+  .stack-card h3{font-size:0.95rem;margin-bottom:10px;color:var(--blue);font-family:'JetBrains Mono',monospace;}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;}
+  .chip{
+    font-size:0.78rem;background:var(--surface-2);border:1px solid var(--border);
+    color:var(--text);padding:4px 10px;border-radius:5px;font-family:'JetBrains Mono',monospace;
+  }
+
+  /* Metrics */
+  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px;}
+  .metric{border:1px solid var(--border);border-radius:8px;padding:20px;background:var(--surface);}
+  .metric .num{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:600;color:var(--amber);}
+  .metric .label{color:var(--text-dim);font-size:0.82rem;margin-top:4px;}
+
+  /* Contact */
+  .contact-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:10px;
+    padding:36px;text-align:center;
+  }
+  .contact-card p{color:var(--text-dim);margin-bottom:22px;}
+  .contact-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;}
+  .contact-links a{
+    font-family:'JetBrains Mono',monospace;font-size:0.88rem;
+    border:1px solid var(--border);padding:9px 16px;border-radius:6px;color:var(--text);
+  }
+  .contact-links a:hover{border-color:var(--blue);color:var(--blue);}
+
+  footer{padding:28px 0;text-align:center;color:var(--text-dim);font-size:0.8rem;font-family:'JetBrains Mono',monospace;}
+
+  @media (max-width:600px){
+    .stage{grid-template-columns:1fr;}
+    .stage-meta{text-align:left;}
+    .stage:not(:last-child)::after{display:none;}
+    .hero{padding:60px 0 50px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .cursor{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">xyz<span>@</span>devops</div>
+    <div class="nav-links">
+      <a href="#experience">experience</a>
+      <a href="#stack">stack</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="terminal">
+      <div class="term-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="term-title">xyz — zsh</span>
+      </div>
+      <div class="term-body">
+        <div class="term-line"><span class="prompt">xyz@prod</span><span class="path"> ~ %</span> whoami</div>
+        <div class="term-line" id="typed-name"></div>
+        <div class="term-line" style="margin-top:14px;"><span class="prompt">xyz@prod</span><span class="path"> ~ %</span> uptime --role</div>
+        <div class="term-line" id="typed-line2"></div>
+      </div>
+    </div>
+    <p class="hero-sub">DevOps Engineer with 5 years building CI/CD pipelines, automating infrastructure, and keeping production boring — in the best way. I close the gap between "it works on my machine" and "it's live, monitored, and self-healing."</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#contact">Get in touch</a>
+      <a class="btn btn-ghost" href="#experience">See the pipeline</a>
+    </div>
+  </div>
+</header>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="eyebrow">// run history</div>
+    <h2 class="section-title">Experience</h2>
+    <p class="section-desc">Five years of deployments, on-call rotations, and infrastructure that scales without drama.</p>
+
+    <div class="pipeline">
+      <div class="stage">
+        <div class="stage-meta mono">2023 — now</div>
+        <div class="stage-card">
+          <div class="stage-head">
+            <div>
+              <div class="stage-role">Senior DevOps Engineer</div>
+              <div class="stage-co">Cloud Platform Team</div>
+            </div>
+            <span class="badge">deployed</span>
+          </div>
+          <div class="stage-desc">
+            <ul>
+              <li>Lead migration of legacy deployments to GitOps, cutting release time from hours to minutes</li>
+              <li>Own Kubernetes infrastructure across multiple environments and regions</li>
+              <li>Built self-service internal tooling that let developers deploy without filing a ticket</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-meta mono">2021 — 2023</div>
+        <div class="stage-card">
+          <div class="stage-head">
+            <div>
+              <div class="stage-role">DevOps Engineer</div>
+              <div class="stage-co">Infrastructure Team</div>
+            </div>
+            <span class="badge">deployed</span>
+          </div>
+          <div class="stage-desc">
+            <ul>
+              <li>Designed CI/CD pipelines for a microservices architecture spanning 30+ services</li>
+              <li>Reduced infrastructure cost by right-sizing compute and automating scale-down policies</li>
+              <li>Introduced centralized logging and alerting, cutting mean time to detection significantly</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-meta mono">2019 — 2021</div>
+        <div class="stage-card">
+          <div class="stage-head">
+            <div>
+              <div class="stage-role">Systems / Automation Engineer</div>
+              <div class="stage-co">Platform Engineering</div>
+            </div>
+            <span class="badge">deployed</span>
+          </div>
+          <div class="stage-desc">
+            <ul>
+              <li>Automated manual provisioning workflows using Infrastructure as Code</li>
+              <li>Built the team's first monitoring dashboards and on-call runbooks</li>
+              <li>Migrated on-prem workloads to the cloud with zero unplanned downtime</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <div class="eyebrow">// dependencies</div>
+    <h2 class="section-title">Stack</h2>
+    <p class="section-desc">Grouped by where it sits in the system, not alphabetically.</p>
+
+    <div class="stack-grid">
+      <div class="stack-card">
+        <h3>ci_cd</h3>
+        <div class="chips">
+          <span class="chip">Jenkins</span><span class="chip">GitHub Actions</span><span class="chip">GitLab CI</span><span class="chip">ArgoCD</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <h3>containers_orchestration</h3>
+        <div class="chips">
+          <span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">Helm</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <h3>infrastructure_as_code</h3>
+        <div class="chips">
+          <span class="chip">Terraform</span><span class="chip">Ansible</span><span class="chip">CloudFormation</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <h3>cloud</h3>
+        <div class="chips">
+          <span class="chip">AWS</span><span class="chip">Azure</span><span class="chip">GCP</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <h3>monitoring_observability</h3>
+        <div class="chips">
+          <span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">ELK Stack</span><span class="chip">Datadog</span>
+        </div>
+      </div>
+      <div class="stack-card">
+        <h3>scripting</h3>
+        <div class="chips">
+          <span class="chip">Bash</span><span class="chip">Python</span><span class="chip">Go</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="impact">
+  <div class="wrap">
+    <div class="eyebrow">// stdout</div>
+    <h2 class="section-title">By the numbers</h2>
+    <div class="metrics">
+      <div class="metric"><div class="num">5</div><div class="label">years in DevOps</div></div>
+      <div class="metric"><div class="num">99.9%</div><div class="label">uptime maintained</div></div>
+      <div class="metric"><div class="num">30+</div><div class="label">services in production</div></div>
+      <div class="metric"><div class="num">10x</div><div class="label">faster deploys, pre vs. post automation</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="eyebrow">// reach out</div>
+    <h2 class="section-title">Let's talk</h2>
+    <div class="contact-card">
+      <p>Open to new roles, consulting, and conversations about pipelines that actually work.</p>
+      <div class="contact-links">
+        <a href="mailto:xyz@example.com">xyz@example.com</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap mono">$ exit 0 — built by xyz</div>
+</footer>
+
+<script>
+  function typeText(el, text, speed, onDone){
+    let i = 0;
+    function step(){
+      if(i <= text.length){
+        el.textContent = text.slice(0, i);
+        i++;
+        setTimeout(step, speed);
+      } else if(onDone){
+        onDone();
+      }
+    }
+    step();
+  }
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const nameEl = document.getElementById('typed-name');
+  const line2El = document.getElementById('typed-line2');
+
+  if(reduceMotion){
+    nameEl.textContent = 'xyz — DevOps Engineer';
+    line2El.textContent = '5 years, 0 regrets, infinite retries.';
+  } else {
+    typeText(nameEl, 'xyz — DevOps Engineer', 35, function(){
+      const cursor = document.createElement('span');
+      cursor.className = 'cursor';
+      nameEl.after(cursor);
+      setTimeout(function(){
+        cursor.remove();
+        typeText(line2El, '5 years, 0 regrets, infinite retries.', 35, function(){
+          const cursor2 = document.createElement('span');
+          cursor2.className = 'cursor';
+          line2El.after(cursor2);
+        });
+      }, 200);
+    });
+  }
+</script>
+
+</body>
+</html>

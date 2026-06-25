@@ -17,5 +17,5 @@ else:
 
     run("sudo nginx -t && sudo systemctl reload nginx")
 
-ssh.close()
+# ssh.close()
 print("Done")

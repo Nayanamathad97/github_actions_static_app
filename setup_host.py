@@ -9,13 +9,13 @@ if shutil.which("nginx"):
 else:
     command="sudo apt-get update && sudo apt-get install -y nginx"
     run(command)
-    run("sudo mv ./nayanap.site.conf /etc/nginx/sites-available/nayanap.site")
-    run("sudo ln-sf /etc/nginx/sites-available/nayanap.site /etc/nginx/sites-enabled/nayanap.site")
-    run("sudo rm -f /etc/nginx/sites-enabled/default")
-    run("sudo mkdir -p /var/www/nayanap.site")
-    run("sudo mv ./index.html /var/www/nayanap.site/index.html")
+run("sudo mv ./nayanap.site.conf /etc/nginx/sites-available/nayanap.site")
+run("sudo ln-sf /etc/nginx/sites-available/nayanap.site /etc/nginx/sites-enabled/nayanap.site")
+run("sudo rm -f /etc/nginx/sites-enabled/default")
+run("sudo mkdir -p /var/www/nayanap.site")
+run("sudo mv ./index.html /var/www/nayanap.site/index.html")
 
-    run("sudo nginx -t && sudo systemctl reload nginx")
+run("sudo nginx -t && sudo systemctl reload nginx")
 
 # ssh.close()
 print("Done")

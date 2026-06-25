@@ -5,7 +5,7 @@ import os
 def run(cmd):
     subprocess.run(cmd, shell=True, check=True)
 if shutil.which("nginx"):
-    print("nginx is installed")
+    print("nginx is now installed")
 else:
     command="sudo apt-get update && sudo apt-get install -y nginx"
     run(command)
